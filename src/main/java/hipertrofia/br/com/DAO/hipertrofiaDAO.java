@@ -7,7 +7,7 @@ import javax.persistence.Persistence;
 import hipertrofia.br.com.modelo.Cartao;
 import hipertrofia.br.com.modelo.Pedido;
 import hipertrofia.br.com.modelo.Produto;
-
+//@autor Enéas
 public class hipertrofiaDAO {
 	//Produto
 	//1. Cadastro
@@ -78,7 +78,8 @@ public class hipertrofiaDAO {
 		}
 
 	//Cartão
-		public static String cadastrarCartao(Cartao cartao) {
+		//1. Cadastro
+	public static String cadastrarCartao(Cartao cartao) {
 			EntityManagerFactory emf= Persistence.createEntityManagerFactory("hipertrofia-conexao");//Fabrica de conexão
 			EntityManager em = emf.createEntityManager();//gerenciador
 			em.getTransaction().begin();
@@ -93,6 +94,7 @@ public class hipertrofiaDAO {
 			em.getTransaction().commit();
 			return "Cadastro concluido";
 			}
+		//2.Listar
 		public static Cartao listarCartao() {
 			EntityManagerFactory emf= Persistence.createEntityManagerFactory("hipertrofia-conexao");//Fabrica de conexão
 			EntityManager em = emf.createEntityManager();//gerenciador
@@ -109,8 +111,42 @@ public class hipertrofiaDAO {
 			em.getTransaction().commit();
 			return carteira;
 			}
+		//3. Remover
+		public static String removerCartao(int idCartao) {
+			EntityManagerFactory emf= Persistence.createEntityManagerFactory("hipertrofia-conexao");//Fabrica de conexão
+			EntityManager em = emf.createEntityManager();//gerenciador
+			em.getTransaction().begin();
+			try {
+				Produto remover = em.find(Produto.class, idCartao);
+				em.remove(remover);
+			} catch (Exception e) {
+				em.getTransaction().rollback();
+				e.printStackTrace();
+			}
+			
+			em.close();
+			em.getTransaction().commit();
+			return "Cartão removido";
+			}
+		//4. Atualizar
+		public static String atualizarCartao(Cartao cartao) {
+			EntityManagerFactory emf= Persistence.createEntityManagerFactory("hipertrofia-conexao");//Fabrica de conexão
+			EntityManager em = emf.createEntityManager();//gerenciador
+			em.getTransaction().begin();
+			try {
+				em.merge(cartao);
+			} catch (Exception e) {
+				em.getTransaction().rollback();
+				e.printStackTrace();
+			}
+			
+			em.close();
+			em.getTransaction().commit();
+			return "Cartão atualizado";
+			}
 	//Pedido
-	public static String cadastrarPedido(Pedido pedido) {
+	//1.Cadastrar
+		public static String cadastrarPedido(Pedido pedido) {
 		EntityManagerFactory emf= Persistence.createEntityManagerFactory("hipertrofia-conexao");//Fabrica de conexão
 		EntityManager em = emf.createEntityManager();//gerenciador
 		em.getTransaction().begin();
@@ -125,6 +161,7 @@ public class hipertrofiaDAO {
 		em.getTransaction().commit();
 		return "Cadastro concluido";
 		}
+	//2.Listar
 	public static Pedido listarPedido() {
 		EntityManagerFactory emf= Persistence.createEntityManagerFactory("hipertrofia-conexao");//Fabrica de conexão
 		EntityManager em = emf.createEntityManager();//gerenciador
@@ -140,5 +177,38 @@ public class hipertrofiaDAO {
 		em.close();
 		em.getTransaction().commit();
 		return ordem;
+		}
+	//3. Remover
+	public static String removerPedido(int idPedido) {
+		EntityManagerFactory emf= Persistence.createEntityManagerFactory("hipertrofia-conexao");//Fabrica de conexão
+		EntityManager em = emf.createEntityManager();//gerenciador
+		em.getTransaction().begin();
+		try {
+			Produto remover = em.find(Produto.class, idPedido);
+			em.remove(remover);
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+		}
+		
+		em.close();
+		em.getTransaction().commit();
+		return "Pedido removido";
+		}
+	//4. Atualizar
+	public static String atualizarPedido(Pedido pedido) {
+		EntityManagerFactory emf= Persistence.createEntityManagerFactory("hipertrofia-conexao");//Fabrica de conexão
+		EntityManager em = emf.createEntityManager();//gerenciador
+		em.getTransaction().begin();
+		try {
+			em.merge(pedido);
+		} catch (Exception e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+		}
+		
+		em.close();
+		em.getTransaction().commit();
+		return "Pedido atualizado";
 		}
 }
