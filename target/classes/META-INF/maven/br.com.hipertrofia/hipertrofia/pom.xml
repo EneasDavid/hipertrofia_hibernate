@@ -3,8 +3,8 @@
 <!--Depedencias do MAEVEN - Baixa as bilbiotecas que não são default-->
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>br.com.hipertrofia</groupId>
-  <artifactId>hipertrofia</artifactId>
+  <groupId>br.com.hipertrofia</groupId><!-- muda pro nome do projeto-->
+  <artifactId>hipertrofia</artifactId><!-- muda pro nome do database-->
   <version>0.0.1-SNAPSHOT</version>
   <description>Incrementação do java o com banco de dados</description>
   <build>

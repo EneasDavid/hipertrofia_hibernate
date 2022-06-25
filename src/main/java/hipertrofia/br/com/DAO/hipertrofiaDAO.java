@@ -117,7 +117,7 @@ public class hipertrofiaDAO {
 			EntityManager em = emf.createEntityManager();//gerenciador
 			em.getTransaction().begin();
 			try {
-				Produto remover = em.find(Produto.class, idCartao);
+				Cartao remover = em.find(Cartao.class, idCartao);
 				em.remove(remover);
 			} catch (Exception e) {
 				em.getTransaction().rollback();
